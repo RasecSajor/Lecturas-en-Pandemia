@@ -1,0 +1,32 @@
+Código de conexión a BD
+
+Copia el siguiente código para crear una conexión a la base de datos:
+
+# importar librerías
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Definir los parámetros para conectarse a la base de dato:
+# a. Nombre de usuario (user). 
+# b. Contraseña (pwd).
+# c. Dirección del servidor (host).
+# d. Puerto de conexión (port).
+# e. Nombre de la base de datos (db).
+db_config = {'user': 'practicum_student',
+             'pwd': 's65BlTKV3faNIGhmvJVzOqhs',
+             'host': 'rc1b-wcoijxj3yxfsf3fs.mdb.yandexcloud.net',
+             'port': 6432,
+             'db': 'data-analyst-final-project-db'}
+
+# Crear cadena de conexión a la base de datos.
+connection_string = 'postgresql://{}:{}@{}:{}/{}'.format(db_config['user'],
+                                                         db_config['pwd'],
+                                                         db_config['host'],
+                                                         db_config['port'],
+                                                         db_config['db'])
+
+# Conectar a la base de datos. 
+engine = create_engine(connection_string, connect_args={'sslmode':'require'})
+​
+La conexión se almacena en la variable engine. Puedes ejecutar una consulta SQL utilizando pandas:
+pd.io.sql.read_sql(query, con = engine)
